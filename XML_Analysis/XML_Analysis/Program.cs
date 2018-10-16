@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using XML_Analysis.Models;
-//張祈安姬掰
+
 namespace XML_Analysis
 {
     class Program
@@ -22,7 +22,7 @@ namespace XML_Analysis
             var xml = XElement.Load(@"D:\Github\20181005_XML_Analysis\20181005_XML_Analysis\factory.xml");
 
             var Ebhsdata_count = xml.Descendants("EBHSDATA").ToList();
-
+            /*
             for (var i = 0; i < Ebhsdata_count.Count ; i++)
             {
                 var Ebhsdata = Ebhsdata_count[i];
@@ -33,7 +33,16 @@ namespace XML_Analysis
                 item.Category = getValue(Ebhsdata, "CATEGORY");
                 result.Add(item);
             };
-
+            */
+            Ebhsdata_count.ToList()
+                .ForEach(Ebhsdata =>
+                {
+                    OpenData item = new OpenData();
+                    item.companyname = getValue(Ebhsdata, "NAME");
+                    item.Address = getValue(Ebhsdata, "ADDR");
+                    item.Category = getValue(Ebhsdata, "CATEGORY");
+                    result.Add(item);
+                });
 
             return result;
         }
