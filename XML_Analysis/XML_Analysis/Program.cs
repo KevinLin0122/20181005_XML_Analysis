@@ -34,6 +34,7 @@ namespace XML_Analysis
                 result.Add(item);
             };
             */
+            //1012
             Ebhsdata_count.ToList()
                 .ForEach(Ebhsdata =>
                 {
