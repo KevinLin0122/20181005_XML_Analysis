@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using XML_Analysis.Models;
+using XML_Analysis.repositories;
 
 namespace XML_Analysis
 {
@@ -11,7 +12,13 @@ namespace XML_Analysis
         static void Main(string[] args)
         {
             var Ebhsdata_Count = findOpenData();
-            ShowOpenData(Ebhsdata_Count);
+            repository DBoperation = new repository();
+            var SqlConn = DBoperation.Connection();
+            Ebhsdata_Count.ForEach(Ebhsdata =>
+                {
+                    DBoperation.Insert_Data(SqlConn, Ebhsdata);
+                });
+
             Console.ReadKey(); 
         }
 
@@ -22,19 +29,7 @@ namespace XML_Analysis
             var xml = XElement.Load(@"D:\Github\20181005_XML_Analysis\20181005_XML_Analysis\factory.xml");
 
             var Ebhsdata_count = xml.Descendants("EBHSDATA").ToList();
-            /*
-            for (var i = 0; i < Ebhsdata_count.Count ; i++)
-            {
-                var Ebhsdata = Ebhsdata_count[i];
-                OpenData item = new OpenData();
 
-                item.companyname = getValue(Ebhsdata, "NAME");
-                item.Address = getValue(Ebhsdata, "ADDR");
-                item.Category = getValue(Ebhsdata, "CATEGORY");
-                result.Add(item);
-            };
-            */
-            //1012
             Ebhsdata_count.ToList()
                 .ForEach(Ebhsdata =>
                 {
@@ -43,6 +38,7 @@ namespace XML_Analysis
                     item.Address = getValue(Ebhsdata, "ADDR");
                     item.Category = getValue(Ebhsdata, "CATEGORY");
                     result.Add(item);
+
                 });
 
             return result;
@@ -65,8 +61,7 @@ namespace XML_Analysis
                         Console.WriteLine(message);
                     }
                 );
-
-     
         }
+
     }
 }
