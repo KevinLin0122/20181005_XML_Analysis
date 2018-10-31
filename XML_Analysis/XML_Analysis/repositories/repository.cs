@@ -40,5 +40,37 @@ namespace XML_Analysis.repositories
             }
         }
 
+        public List<OpenData> Select_All_Data(SqlConnection conn, string name)
+        {
+            
+            var result = new List<OpenData>();
+
+            conn.Open();
+
+            var sql_command = new SqlCommand("", conn)  ;
+            // SqlCommand mySqlCmd = new SqlCommand(string, conn);
+            sql_command.CommandText = string.Format(@"Select Id,companyname,Address,Category From sOpenData");
+            /*
+            if (!string.IsNullOrEmpty(name))
+                sql_command.CommandText = $"{sql_command.CommandText}Where Category =N'{name}'";
+            */
+            var reader = sql_command.ExecuteReader();
+
+            
+            while (reader.Read() )
+            {
+                var item = new OpenData();
+                item.id = reader.GetInt32(0);
+                item.companyname = reader.GetString(1);
+                item.Address = reader.GetString(2);
+                item.Category = reader.GetString(3);
+                result.Add(item);
+            }
+          
+            conn.Close();
+            return result;
+           
+        }
+
     }
 }

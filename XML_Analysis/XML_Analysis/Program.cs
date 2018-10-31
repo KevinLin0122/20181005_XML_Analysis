@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using XML_Analysis.Models;
 using XML_Analysis.repositories;
+using XML_Analysis.Service;
 
 namespace XML_Analysis
 {
@@ -11,13 +12,16 @@ namespace XML_Analysis
     {
         static void Main(string[] args)
         {
-            var Ebhsdata_Count = findOpenData();
-            repository DBoperation = new repository();
-            var SqlConn = DBoperation.Connection();
-            Ebhsdata_Count.ForEach(Ebhsdata =>
-                {
-                    DBoperation.Insert_Data(SqlConn, Ebhsdata);
-                });
+            //var Ebhsdata_Count = findOpenData();
+            //repository DBoperation = new repository();
+            // var SqlConn = DBoperation.Connection();
+            //ImportService ImportToDb
+            ImportService importservice = new ImportService();
+            string name = "Category";
+            var nodes = importservice.Find_Data_From_Db(name);
+
+            ShowOpenData(nodes);
+
 
             Console.ReadKey(); 
         }
