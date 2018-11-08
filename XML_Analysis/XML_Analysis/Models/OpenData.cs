@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XML_Analysis.Models
 {
-    class OpenData
+    public class OpenData
     {
 
         public int id { get; set; }
