@@ -20,10 +20,7 @@ namespace XML_Analysis.repositories
         {
             var result = new List<OpenData>();
             var query = OpenDataDbContext.OpenData.AsQueryable(); 
-            if (!string.IsNullOrEmpty(name))
-            {
-                query = query.Where(x => x.Category == name);
-            }
+           
             return query.ToList();
         }
         public void Insert(OpenData item)

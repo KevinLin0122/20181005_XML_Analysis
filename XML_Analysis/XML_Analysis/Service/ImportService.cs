@@ -11,8 +11,6 @@ namespace XML_Analysis.Service
     class ImportService
     {
 
-
-
         public List<OpenData> findOpenData()
         {
             List<OpenData> result = new List<OpenData>();

@@ -14,9 +14,11 @@ namespace XML_Analysis.Service
         }
         public List<OpenData> FindOpenDataFromDb(string name)
         {
-
             return _efRepository.SelectAll(name);
         }
+
+        
+
 
     }
 }

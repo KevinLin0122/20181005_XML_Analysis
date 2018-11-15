@@ -23,7 +23,7 @@ namespace XML_Analysis.repositories
             {
                 conn.Open();
 
-                string sql_Insert = "  INSERT INTO sOpenData(companyname, Address, Category) VALUES ( N'" + item.companyname + "',N'" + item.Address + "',N'" + item.Category + "')";
+                string sql_Insert = "  INSERT INTO OpenData(companyname, Address, Category) VALUES ( N'" + item.companyname + "',N'" + item.Address + "',N'" + item.Category + "')";
 
                 SqlCommand mySqlCmd = new SqlCommand(sql_Insert, conn);
 
@@ -49,7 +49,7 @@ namespace XML_Analysis.repositories
 
             var sql_command = new SqlCommand("", conn)  ;
             // SqlCommand mySqlCmd = new SqlCommand(string, conn);
-            sql_command.CommandText = string.Format(@"Select Id,companyname,Address,Category From sOpenData");
+            sql_command.CommandText = string.Format(@"Select Id,companyname,Address,Category From OpenData");
             /*
             if (!string.IsNullOrEmpty(name))
                 sql_command.CommandText = $"{sql_command.CommandText}Where Category =N'{name}'";

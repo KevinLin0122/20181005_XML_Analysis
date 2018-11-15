@@ -16,17 +16,13 @@ namespace XML_Analysis
             //repository DBoperation = new repository();
             // var SqlConn = DBoperation.Connection();
             //ImportService ImportToDb
-            /* ImportService importservice = new ImportService();
-             string name = "Category";*/
 
-            EFImportService importService = new EFImportService();
+                      
+           EFImportService EFImportService = new EFImportService();
 
-            
+           var nodes = EFImportService.FindOpenDataFromDb("Category");
 
-            var nodes = importService.FindOpenDataFromDb("Category");
-
-            ShowOpenData(nodes);
-
+           ShowOpenData(nodes);
 
             Console.ReadKey(); 
         }
