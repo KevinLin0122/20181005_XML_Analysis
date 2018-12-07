@@ -1,60 +1,77 @@
-﻿using System;
+﻿using HC.Models;
+using HC.Repository;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using XML_Analysis.Models;
-using XML_Analysis.repositories;
 
-namespace XML_Analysis.Service
+
+namespace HC.Service
 {
     class ImportService
     {
 
-        public List<OpenData> findOpenData()
+        public static ImportService CreateForEF()
+        {
+            return new ImportService(new EFrepository());
+        }
+
+        public IOpenDataRepository Repository { get; set; }
+        private ImportService(EFrepository repository) { Repository = repository; }
+
+        public List<OpenData> FindOpenDataFromXml()
         {
             List<OpenData> result = new List<OpenData>();
 
-            var xml = XElement.Load(@"D:\Github\20181005_XML_Analysis\20181005_XML_Analysis\factory.xml");
+            string baseDir = Directory.GetCurrentDirectory();
 
-            var Ebhsdata_count = xml.Descendants("EBHSDATA").ToList();
 
-            Ebhsdata_count.ToList()
-                .ForEach(Ebhsdata =>
+
+            var xml = XElement.Load(System.IO.Path.Combine(baseDir, "App_Data/datagovtw_dataset_20181005.xml"));
+
+
+            //XNamespace gml = @"http://www.opengis.net/gml/3.2";
+            //XNamespace twed = @"http://twed.wra.gov.tw/twedml/opendata";
+            var nodes = xml.Descendants("node").ToList();
+
+
+            result = nodes
+                .Where(x => !x.IsEmpty).ToList()
+                .Select(node =>
                 {
                     OpenData item = new OpenData();
-                    item.companyname = getValue(Ebhsdata, "NAME");
-                    item.Address = getValue(Ebhsdata, "ADDR");
-                    item.Category = getValue(Ebhsdata, "CATEGORY");
-                    result.Add(item);
-
-                });
-
+                    item.id = int.Parse(getValue(node, "id"));
+                    item.companyname = getValue(node, "companyname");
+                    item.Address = getValue(node, "Address");
+                    item.Category = getValue(node, "Category");
+                    return item;
+                }).ToList();
             return result;
+
         }
+        public List<OpenData> FindOpenDataFromDb(string name = null)
+        {
+            return Repository.SelectAll(name);
+        }
+
 
         public void ImportToDb(List<OpenData> openDatas)
         {
-            repository DBoperation = new repository();
-            var SqlConn = DBoperation.Connection();
-            openDatas.ForEach(new_items =>
+
+            openDatas.ForEach(item =>
             {
-                DBoperation.Insert_Data(SqlConn, new_items);
+                Repository.Insert(item);
             });
 
         }
 
-        public List<OpenData> Find_Data_From_Db(string name)
-        {
-            repository DBoperation = new repository();
-            var SqlConn = DBoperation.Connection();
-            return  DBoperation.Select_All_Data(SqlConn, name);
-            
-        }
 
-        private static string getValue(XElement Ebhsdata, string propertyName)
+        private string getValue(XElement node, string propertyName)
         {
-            return Ebhsdata.Element(propertyName)?.Value?.Trim();
+            return node.Element(propertyName)?.Value?.Trim();
+
         }
     }
 }

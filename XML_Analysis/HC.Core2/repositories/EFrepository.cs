@@ -1,13 +1,14 @@
-﻿using System;
+﻿using HC.DataBase;
+using HC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using XML_Analysis.DataBase;
-using XML_Analysis.Models;
 
-namespace XML_Analysis.repositories
+
+namespace HC.Repository
 {
-    public class EFrepository
+    public class EFrepository : IOpenDataRepository
     {
         private OpenDataDbContext OpenDataDbContext { get; set; }
 

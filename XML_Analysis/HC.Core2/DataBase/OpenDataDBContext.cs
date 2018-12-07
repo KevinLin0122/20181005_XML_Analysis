@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HC.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using XML_Analysis.Models;
 
 
-namespace XML_Analysis.DataBase
+namespace HC.DataBase
 {
     public class OpenDataDbContext : DbContext
     {

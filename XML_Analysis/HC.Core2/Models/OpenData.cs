@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace XML_Analysis.Models
+namespace HC.Models
 {
     public class OpenData
     {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using HC.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
-using XML_Analysis.Models;
 
-namespace XML_Analysis.repositories
+namespace HC.Repository
 {
     class repository
     {
