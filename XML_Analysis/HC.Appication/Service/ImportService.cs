@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace HC.Service
 {
-    class ImportService
+    public class ImportService
     {
 
         public static ImportService CreateForEF()

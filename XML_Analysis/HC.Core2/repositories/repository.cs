@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HC.Repository
 {
-    class repository
+    public class repository
     {
         public SqlConnection Connection()
         {
