@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -17,14 +18,16 @@ namespace XML_Analysis
             // var SqlConn = DBoperation.Connection();
             //ImportService ImportToDb
 
-                      
-           EFImportService EFImportService = new EFImportService();
 
-           var nodes = EFImportService.FindOpenDataFromDb("Category");
+            HC.Service.ImportService importService = HC.Service.ImportService.CreateForEF(); ;
 
-           ShowOpenData(nodes);
+            var nodes = importService.FindOpenDataFromDb();
 
-            Console.ReadKey(); 
+
+
+
+            ShowOpenData(nodes);
+            Console.ReadKey();
         }
 
         static List<OpenData> findOpenData()
