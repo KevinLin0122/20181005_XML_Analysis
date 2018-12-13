@@ -11,10 +11,7 @@ namespace XML_Analysis
     {
         static void Main(string[] args)
         {
-            //var Ebhsdata_Count = findOpenData();
-            //repository DBoperation = new repository();
-            // var SqlConn = DBoperation.Connection();
-            //ImportService ImportToDb
+        
 
            ImportService importService = ImportService.CreateForEF(); ;
 
