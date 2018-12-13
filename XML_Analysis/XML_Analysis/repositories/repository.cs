@@ -49,7 +49,7 @@ namespace XML_Analysis.repositories
 
             var sql_command = new SqlCommand("", conn)  ;
             // SqlCommand mySqlCmd = new SqlCommand(string, conn);
-            sql_command.CommandText = string.Format(@"Select Id,companyname,Address,Category From sOpenData");
+            sql_command.CommandText = string.Format(@"Select Id,companyname,Address,Category From OpenData");
             /*
             if (!string.IsNullOrEmpty(name))
                 sql_command.CommandText = $"{sql_command.CommandText}Where Category =N'{name}'";
