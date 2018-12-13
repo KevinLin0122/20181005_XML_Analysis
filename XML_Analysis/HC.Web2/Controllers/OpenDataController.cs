@@ -1,5 +1,4 @@
-﻿
-using HC.DataBase;
+﻿using HC.DataBase;
 using HC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
