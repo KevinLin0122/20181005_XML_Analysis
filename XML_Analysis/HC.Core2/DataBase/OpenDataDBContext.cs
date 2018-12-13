@@ -14,7 +14,6 @@ namespace HC.DataBase
             get
             {
                 return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Github\20181005_XML_Analysis\20181005_XML_Analysis\XML_Analysis\XML_Analysis\App_Data\Database1.mdf;Integrated Security=True";
-
             }
 
         }
